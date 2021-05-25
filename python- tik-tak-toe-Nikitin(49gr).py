@@ -1,3 +1,4 @@
+# приветственное слово и правила игры.
 def greet():
     print("-------------------")
     print("  Приветсвуем вас  ")
@@ -9,6 +10,7 @@ def greet():
     print(" y - номер столбца ")
 
 
+# Поле для игры
 def show():
     print()
     print("    | 0 | 1 | 2 | ")
@@ -20,6 +22,7 @@ def show():
     print()
 
 
+# Проверка правильности хода
 def ask():
     while True:
         cords = input("         Ваш ход: ").split()
@@ -47,6 +50,7 @@ def ask():
         return x, y
 
 
+# Проверка победы    
 def check_win():
     win_cord = (((0, 0), (0, 1), (0, 2)), ((1, 0), (1, 1), (1, 2)), ((2, 0), (2, 1), (2, 2)),
                 ((0, 2), (1, 1), (2, 0)), ((0, 0), (1, 1), (2, 2)), ((0, 0), (1, 0), (2, 0)),
@@ -64,10 +68,31 @@ def check_win():
     return False
 
 
+# Игра.
 greet()
 field = [[" "] * 3 for i in range(3)]
 count = 0
 while True:
+    count += 1
+    show()
+    if count % 2 == 1:
+        print(" Ходит крестик!")
+    else:
+        print(" Ходит нолик!")
+
+    x, y = ask()
+
+    if count % 2 == 1:
+        field[x][y] = "X"
+    else:
+        field[x][y] = "0"
+
+    if check_win():
+        break
+
+    if count == 9:
+        print(" Ничья!")
+        break
     count += 1
     show()
     if count % 2 == 1:
